@@ -112,6 +112,34 @@ graph TD
     I --> P["website"]
 ```
 
+## Flowchart
+
+```mermaid
+graph TD
+    A[Start] --> B[Docker Compose Up]
+    B --> C{First Run?}
+    C -->|Yes| D[Run Setup Scripts]
+    C -->|No| E[Load Existing Data]
+    D --> F[Create User Accounts]
+    D --> G[Set Up Databases]
+    D --> H[Configure Apache]
+    E --> I[Start Services]
+    F --> I
+    G --> I
+    H --> I
+    I --> J[Apache Web Server]
+    I --> K[MySQL Database]
+    I --> L[PHP]
+    I --> M[SSH Service]
+    J --> N{User Request}
+    N -->|Web Access| O[Serve Web Content]
+    N -->|Database Access| P[PhpMyAdmin]
+    N -->|SSH| Q[User Shell]
+    O --> R[End]
+    P --> R
+    Q --> R
+```
+
 ## 👤 User Management
 
 Users are created based on the CSV files:
