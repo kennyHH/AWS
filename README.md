@@ -84,11 +84,11 @@ graph TD
 
 ## 🖥 Usage
 
-- Apache web server is accessible at `http://localhost`
-- PhpMyAdmin is accessible at `http://localhost:8080`
+- Apache web server is accessible at `http://<ip>`
+- PhpMyAdmin is accessible at `http://<ip>:8080`
 - SSH into the Apache container:
   ```bash
-  ssh -p 2222 username@localhost
+  ssh -p 2222 username@<ip>
   ```
 
 ## 📁 Directory Structure
