@@ -112,7 +112,7 @@ graph TD
     I --> P["website"]
 ```
 
-## Flowchart
+## 🌊 Flowchart
 
 ```mermaid
 graph TD
@@ -181,5 +181,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ---
 
 <div align="center">
-  Made with ❤️ by [Your Name/Organization]
+  Made with ❤️ by Bartosz Mazur
 </div>
