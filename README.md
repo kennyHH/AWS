@@ -121,13 +121,13 @@ graph TD
     I --> P["website"]
 ```
 >[!IMPORTANT] 
-> - Each Web Development user has a FTP website folder for their web-accessible content.
-> - Computer Science and Other groups have no persistent folders on the disk apart from MySQL database !
+> - Each Web Development users have restricted FTP access for their web-accessible content.
+> - Only MySQL databases and home folders have persistance.
 
 **Setup**
 - `/aws/config/`: Stores configuration files for the project
 - `/aws/scripts/`: Holds script files for setup and maintenance
-- `/aws/setup_flag`/: Contains flags to indicate setup status
+- `/aws/setup_flag/`: Contains flags to indicate setup status
   
 **Persistent**
 - `/aws/hncwebsa/`: Contains home directories for web development users (hncwebsa1, hncwebsa2, etc.)
@@ -186,9 +186,15 @@ User data including home folders and MySQL databases persist across container re
 - 🛡️ Review and adjust file permissions as needed
 - 🔐 Consider using Docker secrets for sensitive information in production
 
-## 🔧 Troubleshooting
+## 🔧 Bugs
 
-WIP
+#### Apache errors
+
+- `AH00671: The Alias directive in /etc/apache2/sites-enabled/student19.conf at line 1 will probably never match because it overlaps an earlier Alias.`
+- `[Note] Access denied for user 'root'@'localhost' (using password: NO)`
+
+
+
 
 ## 🖥 Roadmap 
 
