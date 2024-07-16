@@ -111,6 +111,16 @@ graph TD
     H --> O["website"]
     I --> P["website"]
 ```
+>[!IMPORTANT] 
+> - Each Web Development user has a website folder for their web-accessible content.
+> - Computer Science and Other groups have no persistent folders on the disk apart from MySQL database !
+
+- `/home/hncwebsa/`: Contains home directories for web development users (hncwebsa1, hncwebsa2, etc.)
+- `/home/otherusers/`: Houses home directories for restricted users (hnccssa and hncothers groups)
+- `/home/config/`: Stores configuration files for the project
+- `/home/setup_flag`/: Contains flags to indicate setup status
+- `/home/scripts/`: Holds script files for setup and maintenance
+- `/home/mysql_data/`: Stores MySQL database files for persistence
 
 ## 🌊 Flowchart
 
