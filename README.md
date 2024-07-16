@@ -1,7 +1,7 @@
 # 🐳 LAMP Stack Docker Project
 
 <div align="center">
-  <img src="https://via.placeholder.com/150?text=LAMP+Docker" alt="LAMP Docker Logo">
+  <img src="https://miro.medium.com/v2/resize:fit:640/format:webp/0*8gspH6Y2Q141WeLT.jpg" alt="LAMP Docker Logo">
 </div>
 
 This project sets up a LAMP (Linux, Apache, MySQL, PHP) stack using Docker, with additional features for user management and web hosting. It's designed to create a development environment for multiple user groups with different access levels.
@@ -19,9 +19,43 @@ This project sets up a LAMP (Linux, Apache, MySQL, PHP) stack using Docker, with
 
 ## 🏗 Architecture
 
-<div align="center">
-  <img src="https://via.placeholder.com/600x400?text=Project+Architecture+Diagram" alt="Project Architecture">
-</div>
+```mermaid
+graph TD
+    A[User] -->|HTTP/HTTPS| B[Apache]
+    A -->|SFTP| B
+    G[Admin] -->|HTTP| H[phpMyAdmin]
+    
+    B <-->|PHP Requests| C[MySQL]
+    H <--> C
+    
+    B --> D[Student Code]
+    B --> E[Apache Config]
+    
+    J[.env File] -.->|Env Variables| B & C & H
+    
+    linkStyle 0,1 stroke:#ff9999,stroke-width:2px;
+    linkStyle 2 stroke:#9999ff,stroke-width:2px;
+    classDef user fill:#FF9999,stroke:#333,stroke-width:1px;
+    classDef admin fill:#9999FF,stroke:#333,stroke-width:1px;
+    class A user;
+    class G admin;
+    
+    subgraph "Frontend Network"
+    A
+    G
+    B
+    H
+    end
+    
+    subgraph "Backend Network"
+    C
+    end
+    
+    subgraph "Volumes"
+    D
+    E
+    end
+```
 
 ## 🛠 Prerequisites
 
@@ -32,23 +66,18 @@ This project sets up a LAMP (Linux, Apache, MySQL, PHP) stack using Docker, with
 
 1. Clone this repository:
    ```bash
-   git clone <repository-url>
-   cd <repository-directory>
+   git clone https://github.com/kennyHH/AWS.git
+   cd AWS
    ```
 
-2. Create necessary directories:
-   ```bash
-   mkdir -p persistent_home/hncwebsa persistent_home/otherusers
-   ```
+2. Copy or modify your `hnccssa.csv`, `hncwebsa.csv`, and `hncothers.csv` files to the project root.
 
-3. Copy your `hnccssa.csv`, `hncwebsa.csv`, and `hncothers.csv` files to the project root.
-
-4. Create a `.env` file in the project root and add:
+3. Create a `.env` file in the project root and add:
    ```
    MYSQL_ROOT_PASSWORD=your_secure_password_here
    ```
 
-5. Build and start the containers:
+4. Build and start the containers:
    ```bash
    docker-compose up -d --build
    ```
@@ -66,24 +95,28 @@ This project sets up a LAMP (Linux, Apache, MySQL, PHP) stack using Docker, with
 
 ```mermaid
 graph TD
-    A[/home] --> B[/hncwebsa]
-    A --> C[/otherusers]
-    B --> D[/hncwebsa1]
-    B --> E[/hncwebsa2]
-    B --> F[...]
-    C --> G[/hnccssa1]
-    C --> H[/hnccssa2]
-    C --> I[/hncother1]
-    C --> J[...]
-    D --> K[/website]
-    E --> L[/website]
+    A["/home"] --> B["/hncwebsa"]
+    A --> C["/otherusers"]
+    A --> D["config"]
+    A --> E["setup_flag"]
+    A --> F["scripts"]
+    A --> G["mysql_data"]
+    B --> H["hncwebsa1"]
+    B --> I["hncwebsa2"]
+    B --> J["..."]
+    C --> K["hnccssa1"]
+    C --> L["hnccssa2"]
+    C --> M["hncother1"]
+    C --> N["..."]
+    H --> O["website"]
+    I --> P["website"]
 ```
 
 ## 👤 User Management
 
 Users are created based on the CSV files:
 - `hncwebsa.csv`: Web development users
-- `hnccssa.csv`: Restricted access users
+- `hnccssa.csv`: Computer Science access users
 - `hncothers.csv`: Other restricted access users
 
 Format for CSV files:
@@ -95,9 +128,6 @@ username,password
 
 User data and MySQL databases persist across container restarts.
 
-<div align="center">
-  <img src="https://via.placeholder.com/400x200?text=Data+Persistence+Diagram" alt="Data Persistence">
-</div>
 
 ## 🔒 Security Notes
 
@@ -107,11 +137,10 @@ User data and MySQL databases persist across container restarts.
 
 ## 🔧 Troubleshooting
 
-If users are not persisting after container restarts, ensure that the `persistent_home` directory is properly mounted and has the correct permissions.
+WIP
 
-<div align="center">
-  <img src="https://via.placeholder.com/400x200?text=Troubleshooting+Flowchart" alt="Troubleshooting Flowchart">
-</div>
+## 🖥 Roadmap 
+- Persitence for users
 
 ## 🤝 Contributing
 
