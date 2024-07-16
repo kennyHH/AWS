@@ -81,14 +81,22 @@ graph TD
    ```bash
    docker-compose up -d --build
    ```
+>[!TIP] 
+> To recreate the environment from scratch clear/empty folders `apache,mysql_data,student_code,setup_flag and othershome` or use script `cleanup.sh`.
+
 
 ## 🖥 Usage
 
 - Apache web server is accessible at `http://<ip>`
 - PhpMyAdmin is accessible at `http://<ip>:8080`
+- Student websites are accessible at `http://<ip>/hncwebsa1` etc.
 - SSH into the Apache container:
   ```bash
-  ssh -p 2222 username@<ip>
+  ssh -p 2222 <username>@<ip>
+  ```
+- To connect to MySQL after logging using SSH:
+  ```bash
+  mysql -h mysql -P 3306 -u<username> -p
   ```
 
 ## 📁 Directory Structure
@@ -113,7 +121,7 @@ graph TD
     I --> P["website"]
 ```
 >[!IMPORTANT] 
-> - Each Web Development user has a website folder for their web-accessible content.
+> - Each Web Development user has a FTP website folder for their web-accessible content.
 > - Computer Science and Other groups have no persistent folders on the disk apart from MySQL database !
 
 **Setup**
@@ -169,7 +177,7 @@ username,password
 
 ## 💾 Persistence
 
-User data and MySQL databases persist across container restarts.
+User data including home folders and MySQL databases persist across container restarts.
 
 
 ## 🔒 Security Notes
@@ -183,7 +191,7 @@ User data and MySQL databases persist across container restarts.
 WIP
 
 ## 🖥 Roadmap 
-- Persitence for users
+
 
 ## 🤝 Contributing
 
