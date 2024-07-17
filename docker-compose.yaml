@@ -73,6 +73,7 @@ services:
       - ./apache:/etc/apache2/sites-enabled
       - ./config/sshd_config:/etc/ssh/sshd_config
       - ./setup_flag:/setup_flag
+      - ./othershome:/home/othershome
 
     ports:
       - "80:80"
@@ -91,3 +92,4 @@ networks:
 volumes:
   mysql_data:
   setup_flag:
+

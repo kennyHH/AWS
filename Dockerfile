@@ -25,6 +25,9 @@ COPY ./hncothers.csv /root/hncothers.csv
 RUN chmod 700 /root/setup_users_and_databases.sh /root/create_vhosts.sh /root/start_services.sh
 RUN chmod 700 /root/hncothers.csv /root/hncwebsa.csv /root/hnccssa.csv
 
+# Homepage for students
+COPY ./config/index.html /var/www/html/index.html
+RUN chmod 755 /var/www/html/index.html
 
 # Create the groups
 RUN groupadd hncwebsa && usermod -aG hncwebsa www-data

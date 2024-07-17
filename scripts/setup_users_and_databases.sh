@@ -12,6 +12,13 @@ create_users() {
     do
         # Skip the header line
         if [ "$username" != "username" ]; then
+            # Determine home directory based on group
+            if [ "$group" = "hncwebsa" ]; then
+                home_dir="/home/${username}"
+            else
+                home_dir="/home/othershome/${username}"
+            fi
+
             # Check if the database already exists
             if ! mysql -h mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "USE ${username}_db;" 2>/dev/null; then
                 # Create database if it doesn't exist
@@ -24,7 +31,7 @@ create_users() {
             # Check if the user already exists
             if ! id -u "${username}" >/dev/null 2>&1; then
                 # Create user's system account with home directory
-                useradd -m -d "/home/${username}" -s /bin/bash -g "${group}" "${username}"
+                useradd -m -d "${home_dir}" -s /bin/bash -g "${group}" "${username}"
                 # Set password directly from CSV
                 echo "${username}:${password}" | chpasswd
                 echo "Created system user: ${username}"
@@ -34,26 +41,30 @@ create_users() {
                 mysql -h mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "GRANT ALL PRIVILEGES ON ${username}_db.* TO '${username}'@'%';"
                 mysql -h mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "ALTER USER '${username}'@'%' IDENTIFIED BY '${password}';"
                 echo "Created MySQL user: ${username}"
+            else
+                echo "User ${username} already exists. Updating home directory and group."
+                usermod -d "${home_dir}" -g "${group}" "${username}"
             fi
 
-            # Set permissions based on group
+            # Ensure home directory exists and set permissions
+            mkdir -p "${home_dir}"
+            chown "${username}:${group}" "${home_dir}"
+
             if [ "$group" = "hncwebsa" ]; then
                 # More permissive for hncwebsa group
-                chmod 755 "/home/${username}"
+                chmod 755 "${home_dir}"
                 if [ "$needs_web_access" = true ]; then
                     # Set up web directory
-                    mkdir -p "/home/${username}/website"
-                    chown "${username}:${group}" "/home/${username}/website"
-                    chmod 755 "/home/${username}/website"
+                    mkdir -p "${home_dir}/website"
+                    chown "${username}:${group}" "${home_dir}/website"
+                    chmod 755 "${home_dir}/website"
                     echo "Set up web directory for user: ${username}"
-                    chown "root:root" "/home/${username}"
                 fi
+                chown "root:root" "/home/${username}"
             else
                 # More restrictive for other groups
-                chmod 700 "/home/${username}"
-                chown "${username}:${group}" "/home/${username}"
+                chmod 700 "${home_dir}"
             fi
-            
         fi
     done < "$csv_file"
 }
@@ -67,8 +78,8 @@ create_users "/root/hnccssa.csv" "hnccssa" false
 # Create users from others.csv
 create_users "/root/hncothers.csv" "hncothers" false
 
-# Set correct permissions for /home directory
-chmod 755 /home
+# Set correct permissions for /home and /home/othershome directories
+chmod 755 /home /home/othershome
 
 # Flush privileges to ensure all changes take effect
 mysql -h mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "FLUSH PRIVILEGES;"
