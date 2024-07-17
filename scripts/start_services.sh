@@ -5,8 +5,8 @@ if [ ! -f "/setup_flag/setup_done" ]; then
     echo "Running initial setup..."
     
     # Run setup scripts
-    sh /setup_users_and_databases.sh
-    sh /create_vhosts.sh
+    sh /root/setup_users_and_databases.sh
+    sh /root/create_vhosts.sh
     
     echo "Initial setup completed."
 else

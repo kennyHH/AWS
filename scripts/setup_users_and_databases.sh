@@ -59,13 +59,13 @@ create_users() {
 }
 
 # Create users from hncwebsa.csv
-create_users "/hncwebsa.csv" "hncwebsa" true
+create_users "/root/hncwebsa.csv" "hncwebsa" true
 
 # Create users from hnccssa.csv
-create_users "/hnccssa.csv" "hnccssa" false
+create_users "/root/hnccssa.csv" "hnccssa" false
 
 # Create users from others.csv
-create_users "/hncothers.csv" "hncothers" false
+create_users "/root/hncothers.csv" "hncothers" false
 
 # Set correct permissions for /home directory
 chmod 755 /home
