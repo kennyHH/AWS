@@ -17,9 +17,9 @@ RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/s
 COPY ./scripts/setup_users_and_databases.sh /root/setup_users_and_databases.sh
 COPY ./scripts/create_vhosts.sh /root/create_vhosts.sh
 COPY ./scripts/start_services.sh /root/start_services.sh
-COPY ./hnccssa.csv /root/hnccssa.csv
-COPY ./hncwebsa.csv /root/hncwebsa.csv
-COPY ./hncothers.csv /root/hncothers.csv
+COPY ./users_csv/hnccssa.csv /root/hnccssa.csv
+COPY ./users_csv/hncwebsa.csv /root/hncwebsa.csv
+COPY ./users_csv/hncothers.csv /root/hncothers.csv
 
 # Set correct permissions for files
 RUN chmod 700 /root/setup_users_and_databases.sh /root/create_vhosts.sh /root/start_services.sh
