@@ -26,7 +26,7 @@ RUN chmod 700 /root/setup_users_and_databases.sh /root/create_vhosts.sh /root/st
 RUN chmod 700 /root/hncothers.csv /root/hncwebsa.csv /root/hnccssa.csv
 
 # Homepage for students
-COPY ./config/index.html /var/www/html/index.html
+COPY ./persistent_folders/config/index.html /var/www/html/index.html
 RUN chmod 755 /var/www/html/index.html
 
 # Create the groups
@@ -40,4 +40,4 @@ RUN mkdir /setup_flag
 # Set the entrypoint
 ENTRYPOINT ["/root/start_services.sh"]
 # Set the volume for the setup flag
-VOLUME ["/setup_flag"]
+#VOLUME ["/setup_flag"]

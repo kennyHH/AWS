@@ -6,12 +6,19 @@ remove_files() {
     local exclude_file=$2
 
     find "$directory" -mindepth 1 ! -name "$exclude_file" | while read item; do
-        if [ -f "$item" ]; then
+        if [ -f "$item" ] || [ -h "$item" ]; then
             rm -f "$item" && echo "Removed file: $item"
         elif [ -d "$item" ]; then
             rm -rf "$item" && echo "Removed directory: $item"
+        else
+            echo "Unknown file type, skipping: $item"
         fi
     done
+
+    # Specific check for mysql.sock
+    if [ "$directory" = "mysql_data" ] && [ -S "$directory/mysql.sock" ]; then
+        rm -f "$directory/mysql.sock" && echo "Removed socket file: $directory/mysql.sock"
+    fi
 }
 
 # Main script
