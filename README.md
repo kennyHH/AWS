@@ -11,11 +11,13 @@ This project sets up a LAMP (Linux, Apache, MySQL, PHP) stack using Docker, with
 - 🐧 Linux + 🚀 Apache + 🐬 MySQL + 🐘 PHP containerized with Docker
 - 👥 Multiple user groups with different access levels:
   - `hncwebsa`: Web development users with their own web directories
-  - `hnccssa`: Users with restricted access
-  - `hncothers`: Other users with restricted access
+  - `hnccssa`: Computer Science users 
+  - `hncothers`: Other users
 - 💾 Persistent user data and MySQL databases
-- 🛠 PhpMyAdmin for database management
-- 🔐 SSH access for users
+- 🔐 SSH access for Computer Science and Other users
+- ⚓ FTP access for Web development users
+- 🛠 PhpMyAdmin for database management for all
+
 
 ## 🏗 Architecture
 
@@ -125,15 +127,15 @@ graph TD
 > - Only MySQL databases and home folders have persistance.
 
 **Setup**
-- `/aws/config/`: Stores configuration files for the project
-- `/aws/scripts/`: Holds script files for setup and maintenance
-- `/aws/setup_flag/`: Contains flags to indicate setup status
+- `/config/`: Stores configuration files for the project
+- `/scripts/`: Holds script files for setup and maintenance
+- `/setup_flag/`: Contains flags to indicate setup status
   
 **Persistent**
-- `/aws/hncwebsa/`: Contains home directories for web development users (hncwebsa1, hncwebsa2, etc.)
-- `/aws/otherusers/`: Houses home directories for restricted users (hnccssa and hncothers groups)
-- `/aws/mysql_data/`: Stores MySQL database files for persistence
-- `/aws/apache/`: Contains Apache configuration files
+- `/hncwebsa/`: Contains home directories for web development users (hncwebsa1, hncwebsa2, etc.)
+- `/otherusers/`: Houses home directories for restricted users (hnccssa and hncothers groups)
+- `/mysql_data/`: Stores MySQL database files for persistence
+- `/apache/`: Contains Apache configuration files
 
 ## 🌊 Flowchart
 
