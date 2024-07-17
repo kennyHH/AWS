@@ -24,6 +24,16 @@ This project sets up a LAMP (Linux, Apache, MySQL, PHP) stack using Docker, with
 
 ## 🏗 Architecture
 
+### Permissions
+
+| Class Name | Group name  | Naming Convention | MySQL | phpMyAdmin | FTP access | SSH access |
+| ---------- | ----------- | ----------------- | :---: | :--------: | :--------: | :--------: |
+| WebDev     | hncwebsa | hncwebsa1       |   X   |     X      |     X      |            |
+| MySQL      | hnccssa | hnccssa1       |   X   |     X      |            |     X      |
+| AWS        | hncother | hncother1       |   X   |     X      |           |     X      |
+
+### Diagram
+
 ```mermaid
 graph TD
     A[User] -->|HTTP/HTTPS| B[Apache]
