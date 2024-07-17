@@ -94,7 +94,7 @@ graph TD
 
 - Apache web server is accessible at `http://<ip>`
 - PhpMyAdmin is accessible at `http://<ip>:8080`
-- Student websites are accessible at `http://<ip>/hncwebsa1` etc.
+- Student websites are accessible at `http://<ip>/student1` etc.
 - SSH into the Apache container:
   ```bash
   ssh -p 2222 <username>@<ip>
@@ -127,14 +127,14 @@ graph TD
 ```
 >[!IMPORTANT] 
 > - Each Web Development users have restricted FTP access for their web-accessible content.
-> - Only MySQL databases and home folders have persistance.
+> - Only MySQL databases and users home folders have persistance.
 
-**Setup**
+**Setup folders**
 - `/config/`: Stores configuration files for the project
 - `/scripts/`: Holds script files for setup and maintenance
 - `/setup_flag/`: Contains flags to indicate setup status
   
-**Persistent**
+**Persistent folders**
 - `/hncwebsa/`: Contains home directories for web development users (hncwebsa1, hncwebsa2, etc.)
 - `/otherusers/`: Houses home directories for restricted users (hnccssa and hncothers groups)
 - `/mysql_data/`: Stores MySQL database files for persistence
