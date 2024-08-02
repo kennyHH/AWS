@@ -32,47 +32,7 @@ This project sets up a LAMP (Linux, Apache, MySQL, PHP) stack using Docker, with
 | MySQL      | hnccssa | hnccssa1       |   X   |     X      |            |     X      |
 | AWS        | hncother | hncother1       |   X   |     X      |           |     X      |
 
-### Diagram
-
-```mermaid
-graph TD
-    A[User] -->|HTTP/HTTPS| B[Apache]
-    A -->|SFTP| B
-    G[Admin] -->|HTTP| H[phpMyAdmin]
-    
-    B <-->|PHP Requests| C[MySQL]
-    H <--> C
-    
-    B --> D[Student Code]
-    B --> E[Apache Config]
-    
-    J[.env File] -.->|Env Variables| B & C & H
-    
-    linkStyle 0,1 stroke:#ff9999,stroke-width:2px;
-    linkStyle 2 stroke:#9999ff,stroke-width:2px;
-    classDef user fill:#FF9999,stroke:#333,stroke-width:1px;
-    classDef admin fill:#9999FF,stroke:#333,stroke-width:1px;
-    class A user;
-    class G admin;
-    
-    subgraph "Frontend Network"
-    A
-    G
-    B
-    H
-    end
-    
-    subgraph "Backend Network"
-    C
-    end
-    
-    subgraph "Volumes"
-    D
-    E
-    end
-```
-
-## 🛠 Prerequisites
+### 🛠 Prerequisites
 
 - Docker 🐳
 - Docker Compose 🐙
@@ -114,7 +74,90 @@ graph TD
   mysql -h mysql -P 3306 -u<username> -p
   ```
 
-## 📁 Directory Structure
+
+>[!IMPORTANT] 
+> - Each Web Development users have restricted FTP access for their web-accessible content.
+> - Only MySQL databases and users home folders have persistance.
+
+**Setup folders**
+- `/config/`: Stores configuration files for the project
+- `/scripts/`: Holds script files for setup and maintenance
+- `/setup_flag/`: Contains flags to indicate setup status
+  
+**Persistent folders**
+- `/hncwebsa/`: Contains home directories for web development users (hncwebsa1, hncwebsa2, etc.)
+- `/otherusers/`: Houses home directories for restricted users (hnccssa and hncothers groups)
+- `/mysql_data/`: Stores MySQL database files for persistence
+- `/apache/`: Contains Apache configuration files
+
+## 👤 User Management
+
+Users are created based on the CSV files:
+- `hncwebsa.csv`: Web development users
+- `hnccssa.csv`: Computer Science access users
+- `hncothers.csv`: Other restricted access users
+
+Format for CSV files:
+```csv
+username,password
+```
+
+## 💾 Persistence
+
+User data including home folders and MySQL databases persist across container restarts.
+
+
+## 🔒 Security Notes
+
+- 🔑 Change default passwords in CSV files for production use
+- 🛡️ Review and adjust file permissions as needed
+- 🔐 Consider using Docker secrets for sensitive information in production
+
+## 📊 Diagrams and Visualizations
+
+<details>
+<summary>Click to expand/collapse diagrams</summary>
+
+### Diagram
+
+```mermaid
+graph TD
+    A[User] -->|HTTP/HTTPS| B[Apache]
+    A -->|SFTP| B
+    G[Admin] -->|HTTP| H[phpMyAdmin]
+    
+    B <-->|PHP Requests| C[MySQL]
+    H <--> C
+    
+    B --> D[Student Code]
+    B --> E[Apache Config]
+    
+    J[.env File] -.->|Env Variables| B & C & H
+    
+    linkStyle 0,1 stroke:#ff9999,stroke-width:2px;
+    linkStyle 2 stroke:#9999ff,stroke-width:2px;
+    classDef user fill:#FF9999,stroke:#333,stroke-width:1px;
+    classDef admin fill:#9999FF,stroke:#333,stroke-width:1px;
+    class A user;
+    class G admin;
+    
+    subgraph "Frontend Network"
+    A
+    G
+    B
+    H
+    end
+    
+    subgraph "Backend Network"
+    C
+    end
+    
+    subgraph "Volumes"
+    D
+    E
+    end
+```
+### 📁 Directory Structure
 
 ```mermaid
 graph TD
@@ -135,22 +178,7 @@ graph TD
     H --> O["website"]
     I --> P["website"]
 ```
->[!IMPORTANT] 
-> - Each Web Development users have restricted FTP access for their web-accessible content.
-> - Only MySQL databases and users home folders have persistance.
-
-**Setup folders**
-- `/config/`: Stores configuration files for the project
-- `/scripts/`: Holds script files for setup and maintenance
-- `/setup_flag/`: Contains flags to indicate setup status
-  
-**Persistent folders**
-- `/hncwebsa/`: Contains home directories for web development users (hncwebsa1, hncwebsa2, etc.)
-- `/otherusers/`: Houses home directories for restricted users (hnccssa and hncothers groups)
-- `/mysql_data/`: Stores MySQL database files for persistence
-- `/apache/`: Contains Apache configuration files
-
-## 🌊 Flowchart
+### 🌊 Flowchart
 
 ```mermaid
 graph TD
@@ -178,28 +206,8 @@ graph TD
     Q --> R
 ```
 
-## 👤 User Management
+</details>
 
-Users are created based on the CSV files:
-- `hncwebsa.csv`: Web development users
-- `hnccssa.csv`: Computer Science access users
-- `hncothers.csv`: Other restricted access users
-
-Format for CSV files:
-```csv
-username,password
-```
-
-## 💾 Persistence
-
-User data including home folders and MySQL databases persist across container restarts.
-
-
-## 🔒 Security Notes
-
-- 🔑 Change default passwords in CSV files for production use
-- 🛡️ Review and adjust file permissions as needed
-- 🔐 Consider using Docker secrets for sensitive information in production
 
 ## 🔧 Bugs
 
