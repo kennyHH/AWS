@@ -115,69 +115,6 @@ User data including home folders and MySQL databases persist across container re
 
 ## 📊 Diagrams and Visualizations
 
-<details>
-<summary>Click to expand/collapse diagrams</summary>
-
-### Diagram
-
-```mermaid
-graph TD
-    A[User] -->|HTTP/HTTPS| B[Apache]
-    A -->|SFTP| B
-    G[Admin] -->|HTTP| H[phpMyAdmin]
-    
-    B <-->|PHP Requests| C[MySQL]
-    H <--> C
-    
-    B --> D[Student Code]
-    B --> E[Apache Config]
-    
-    J[.env File] -.->|Env Variables| B & C & H
-    
-    linkStyle 0,1 stroke:#ff9999,stroke-width:2px;
-    linkStyle 2 stroke:#9999ff,stroke-width:2px;
-    classDef user fill:#FF9999,stroke:#333,stroke-width:1px;
-    classDef admin fill:#9999FF,stroke:#333,stroke-width:1px;
-    class A user;
-    class G admin;
-    
-    subgraph "Frontend Network"
-    A
-    G
-    B
-    H
-    end
-    
-    subgraph "Backend Network"
-    C
-    end
-    
-    subgraph "Volumes"
-    D
-    E
-    end
-```
-### 📁 Directory Structure
-
-```mermaid
-graph TD
-    A["/aws"] --> B["/hncwebsa"]
-    A --> C["/otherusers"]
-    A --> D["config"]
-    A --> E["setup_flag"]
-    A --> F["scripts"]
-    A --> Z["apache"]
-    A --> G["mysql_data"]
-    B --> H["hncwebsa1"]
-    B --> I["hncwebsa2"]
-    B --> J["..."]
-    C --> K["hnccssa1"]
-    C --> L["hnccssa2"]
-    C --> M["hncother1"]
-    C --> N["..."]
-    H --> O["website"]
-    I --> P["website"]
-```
 ### 🌊 Flowchart
 
 ```mermaid
@@ -206,8 +143,27 @@ graph TD
     Q --> R
 ```
 
-</details>
+### 📁 Directory Structure
 
+```mermaid
+graph TD
+    A["/aws"] --> B["/hncwebsa"]
+    A --> C["/otherusers"]
+    A --> D["config"]
+    A --> E["setup_flag"]
+    A --> F["scripts"]
+    A --> Z["apache"]
+    A --> G["mysql_data"]
+    B --> H["hncwebsa1"]
+    B --> I["hncwebsa2"]
+    B --> J["..."]
+    C --> K["hnccssa1"]
+    C --> L["hnccssa2"]
+    C --> M["hncother1"]
+    C --> N["..."]
+    H --> O["website"]
+    I --> P["website"]
+```
 
 ## 🔧 Bugs
 
