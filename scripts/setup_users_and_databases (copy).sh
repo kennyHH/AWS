@@ -40,10 +40,10 @@ create_users() {
 
                 # Create MySQL user and grant privileges
                 mysql -h mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "CREATE USER '${username}'@'%' IDENTIFIED BY '${password}';"
-                mysql -h mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "GRANT ALL PRIVILEGES ON \`${username}_%\`.* TO '${username}'@'%';"
+                mysql -h mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON ${username}_db.* TO '${username}'@'%';"
                 mysql -h mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "ALTER USER '${username}'@'%' IDENTIFIED BY '${password}';"
-                #mysql -h mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "REVOKE SELECT ON information_schema.* FROM '${username}'@'%';"
-                #mysql -h mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "REVOKE SELECT ON performance_schema.* FROM '${username}'@'%';"
+                mysql -h mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "REVOKE SELECT ON information_schema.* FROM '${username}'@'%';"
+                mysql -h mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "REVOKE SELECT ON performance_schema.* FROM '${username}'@'%';"
                 
                 
                 echo "Created MySQL user: ${username}"
