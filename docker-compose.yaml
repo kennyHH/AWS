@@ -49,35 +49,10 @@ services:
       MYSQL_HOST: mysql
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
-      - ./persistent_folders/student_code/hncwebsa1:/home/hncwebsa1/website
-      - ./persistent_folders/student_code/hncwebsa2:/home/hncwebsa2/website
-      - ./persistent_folders/student_code/hncwebsa3:/home/hncwebsa3/website
-      - ./persistent_folders/student_code/hncwebsa4:/home/hncwebsa4/website
-      - ./persistent_folders/student_code/hncwebsa5:/home/hncwebsa5/website
-      - ./persistent_folders/student_code/hncwebsa6:/home/hncwebsa6/website
-      - ./persistent_folders/student_code/hncwebsa7:/home/hncwebsa7/website
-      - ./persistent_folders/student_code/hncwebsa8:/home/hncwebsa8/website
-      - ./persistent_folders/student_code/hncwebsa9:/home/hncwebsa9/website
-      - ./persistent_folders/student_code/hncwebsa10:/home/hncwebsa10/website
-      - ./persistent_folders/student_code/hncwebsa11:/home/hncwebsa11/website
-      - ./persistent_folders/student_code/hncwebsa12:/home/hncwebsa12/website
-      - ./persistent_folders/student_code/hncwebsa13:/home/hncwebsa13/website
-      - ./persistent_folders/student_code/hncwebsa14:/home/hncwebsa14/website
-      - ./persistent_folders/student_code/hncwebsa15:/home/hncwebsa15/website
-      - ./persistent_folders/student_code/hncwebsa16:/home/hncwebsa16/website
-      - ./persistent_folders/student_code/hncwebsa17:/home/hncwebsa17/website
-      - ./persistent_folders/student_code/hncwebsa18:/home/hncwebsa18/website
-      - ./persistent_folders/student_code/hncwebsa19:/home/hncwebsa19/website
-      - ./persistent_folders/student_code/hncwebsa20:/home/hncwebsa20/website
-      - ./persistent_folders/student_code/hncwebsa21:/home/hncwebsa21/website
-      - ./persistent_folders/student_code/hncwebsa22:/home/hncwebsa22/website
-      - ./persistent_folders/student_code/hncwebsa23:/home/hncwebsa23/website
-      - ./persistent_folders/student_code/hncwebsa24:/home/hncwebsa24/website
-      - ./persistent_folders/student_code/hncwebsa25:/home/hncwebsa25/website
+      - ./persistent_folders/home:/home
       - ./persistent_folders/apache:/etc/apache2/sites-enabled
       - ./persistent_folders/config/sshd_config:/etc/ssh/sshd_config
       - ./persistent_folders/setup_flag:/setup_flag
-      - ./persistent_folders/othershome:/home/othershome
 
     ports:
       - "80:80"

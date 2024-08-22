@@ -121,6 +121,13 @@ Match Group hncwebsa
     X11Forwarding no
     PasswordAuthentication yes
     
+Match Group hncwebmr
+    ChrootDirectory /home/%u
+    ForceCommand internal-sftp
+    AllowTcpForwarding no
+    X11Forwarding no
+    PasswordAuthentication yes
+    
 Match Group hnccssa,hncothers
     X11Forwarding no
     PasswordAuthentication yes

@@ -1,5 +1,5 @@
 #!/bin/bash
-# FOR WEB ACCESS GROUPS ADD THEM IN LINES 17 and 54.
+# FOR WEB ACCESS GROUPS ADD THEM IN LINES 18 and 55.
 # TO CREATE ADDITIONAL USERS FROM CSV ADD THEM AT THE BOTTOM
 
 chmod 755 /var/run/sshd
@@ -15,7 +15,7 @@ create_users() {
         # Skip the header line
         if [ "$username" != "username" ]; then
             # Determine home directory based on group
-            if [ "$group" = "hncwebsa" ] || [ "$group" = "hncwebmr" ]; then  # Added hncwebmr here
+            if [ "$group" = "hncwebsa" ] || [ "$group" = "hncwebmr" ]; then
                 home_dir="/home/${username}"
             else
                 home_dir="/home/othershome/${username}"
@@ -72,16 +72,16 @@ create_users() {
 }
 
 # Create users from hncwebsa.csv
-create_users "/root/hncwebsa.csv" "hncwebsa" true
+create_users "/root/users_csv/hncwebsa.csv" "hncwebsa" true
 
 # Create users from hncwebsa.csv
-create_users "/root/hncwebmr.csv" "hncwebmr" true
+create_users "/root/users_csv/hncwebmr.csv" "hncwebmr" true
 
 # Create users from hnccssa.csv
-create_users "/root/hnccssa.csv" "hnccssa" false
+create_users "/root/users_csv/hnccssa.csv" "hnccssa" false
 
 # Create users from others.csv
-create_users "/root/hncothers.csv" "hncothers" false
+create_users "/root/users_csv/hncothers.csv" "hncothers" false
 
 # Set correct permissions for /home and /home/othershome directories
 chmod 755 /home /home/othershome

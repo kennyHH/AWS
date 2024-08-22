@@ -1,11 +1,10 @@
 #!/bin/bash
 
 # Create the apache directory if it doesn't exist
-mkdir -p /etc/apache2/sites-available
 mkdir -p /etc/apache2/sites-enabled
 
 # Create the main VirtualHost configuration
-cat > "/etc/apache2/sites-available/000-default.conf" << EOF
+cat > "/etc/apache2/sites-enabled/000-default.conf" << EOF
 <VirtualHost *:80>
     ServerName localhost
     DocumentRoot "/var/www/html"
@@ -19,39 +18,42 @@ cat > "/etc/apache2/sites-available/000-default.conf" << EOF
     ErrorLog "\${APACHE_LOG_DIR}/error.log"
     CustomLog "\${APACHE_LOG_DIR}/access.log" combined
 
-    # Student website configurations
+    # Include student-specific configurations
+    IncludeOptional /etc/apache2/sites-enabled/student*.conf
+</VirtualHost>
 EOF
 
-# Add student-specific configurations to 000-default.conf
-for i in $(seq 1 25); do
-    username="hncwebsa$i"
-    cat >> "/etc/apache2/sites-available/000-default.conf" << EOF
-
-    Alias /hncwebsa$i "/home/$username/website"
-    <Directory "/home/$username/website">
-        Options FollowSymLinks
-        AllowOverride All
-        Require all granted
-    </Directory>
+# Function to process CSV file and create configurations
+process_csv() {
+    local csv_file=$1
+    local group=$2
+    local i=$3
+    
+    while IFS=',' read -r username _; do
+        # Skip the header line
+        if [ "$username" != "username" ]; then
+            # Create the student-specific configuration file
+            cat > "/etc/apache2/sites-enabled/student$i.conf" << EOF
+Alias /$username "/home/$username/website"
+<Directory "/home/$username/website">
+    Options FollowSymLinks
+    AllowOverride All
+    Require all granted
+</Directory>
 EOF
-done
+            i=$((i+1))
+        fi
+    done < "$csv_file"
+    
+    echo $i
+}
 
-# Close the VirtualHost block
-echo "</VirtualHost>" >> "/etc/apache2/sites-available/000-default.conf"
+# Process hncwebsa users
+next_index=$(process_csv "/root/users_csv/hncwebsa.csv" "hncwebsa" 1)
 
-# Enable the default site
-ln -sf /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-enabled/000-default.conf
-
-# Remove any existing student-specific conf files to avoid conflicts
-rm -f /etc/apache2/sites-enabled/student*.conf
+# Process hncwebmr users
+process_csv "/root/users_csv/hncwebmr.csv" "hncwebmr" $next_index
 
 # Ensure Apache can read the student directories
 usermod -aG hncwebsa www-data
-
-# Enable necessary Apache modules
-a2enmod rewrite
-
-# Restart Apache to apply changes
-service apache2 restart
-
-echo "Apache configuration completed."
+usermod -aG hncwebmr www-data
