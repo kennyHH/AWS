@@ -16,7 +16,7 @@ if [ ! -f "$input_file" ]; then
 fi
 
 # Create CSV file with header
-echo "USER,PASSWORD,FULLNAME" > "$output_file"
+echo "USERNAME,PASSWORD,FULLNAME" > "$output_file"
 
 # Process each line in the input file
 while IFS= read -r line; do
