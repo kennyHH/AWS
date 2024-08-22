@@ -10,12 +10,12 @@ create_users() {
     local group=$2
     local needs_web_access=$3
 
-    while IFS=',' read -r username password
+    while IFS=',' read -r username password FULLNAME
     do
         # Skip the header line
         if [ "$username" != "username" ]; then
             # Determine home directory based on group
-            if [ "$group" = "hncwebsa" ]; then  
+            if [ "$group" = "hncwebsa" ] || [ "$group" = "hncwebmr" ]; then  # Added hncwebmr here
                 home_dir="/home/${username}"
             else
                 home_dir="/home/othershome/${username}"
@@ -52,8 +52,8 @@ create_users() {
             mkdir -p "${home_dir}"
             chown "${username}:${group}" "${home_dir}"
 
-            if [ "$group" = "hncwebsa" ]; then   # ADD MORE GROUPS HERE FOR WEB ACCESS
-                # More permissive for hncwebsa group
+            if [ "$group" = "hncwebsa" ] || [ "$group" = "hncwebmr" ]; then   # ADD MORE GROUPS HERE FOR WEB ACCESS
+                # More permissive for hncwebsa and hncwebmr groups
                 chmod 755 "${home_dir}"
                 if [ "$needs_web_access" = true ]; then
                     # Set up web directory
@@ -73,6 +73,9 @@ create_users() {
 
 # Create users from hncwebsa.csv
 create_users "/root/hncwebsa.csv" "hncwebsa" true
+
+# Create users from hncwebsa.csv
+create_users "/root/hncwebmr.csv" "hncwebmr" true
 
 # Create users from hnccssa.csv
 create_users "/root/hnccssa.csv" "hnccssa" false
