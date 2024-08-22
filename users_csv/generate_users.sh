@@ -5,15 +5,30 @@ generate_password() {
     < /dev/urandom tr -dc 'A-Za-z0-9' | head -c10
 }
 
-# Prompt for input and output filenames
-read -p "Enter the input text filename: " input_file
-read -p "Enter the CSV filename: " output_file
+# Function to ensure file has the correct extension
+ensure_extension() {
+    local filename="$1"
+    local extension="$2"
+    if [[ $filename != *.$extension ]]; then
+        filename="${filename}.${extension}"
+    fi
+    echo "$filename"
+}
+
+# Prompt for input filename
+read -p "Enter the input filename (without extension): " input_file
+
+# Ensure correct file extension for input
+input_file=$(ensure_extension "$input_file" "txt")
 
 # Check if input file exists
 if [ ! -f "$input_file" ]; then
-    echo "Error: Input file not found!"
+    echo "Error: Input file '$input_file' not found!"
     exit 1
 fi
+
+# Generate output filename
+output_file="${input_file%.txt}.csv"
 
 # Create CSV file with header
 echo "USERNAME,PASSWORD,FULLNAME" > "$output_file"
