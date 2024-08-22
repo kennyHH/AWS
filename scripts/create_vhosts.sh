@@ -27,7 +27,7 @@ for i in $(seq 1 25); do
     username="hncwebsa$i"
     cat >> "/etc/apache2/sites-available/000-default.conf" << EOF
 
-    Alias /student$i "/home/$username/website"
+    Alias /hncwebsa$i "/home/$username/website"
     <Directory "/home/$username/website">
         Options FollowSymLinks
         AllowOverride All
