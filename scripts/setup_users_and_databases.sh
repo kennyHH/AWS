@@ -1,4 +1,6 @@
 #!/bin/bash
+# FOR WEB ACCESS GROUPS ADD THEM IN LINES 17 and 54.
+# TO CREATE ADDITIONAL USERS FROM CSV ADD THEM AT THE BOTTOM
 
 chmod 755 /var/run/sshd
 
@@ -13,7 +15,7 @@ create_users() {
         # Skip the header line
         if [ "$username" != "username" ]; then
             # Determine home directory based on group
-            if [ "$group" = "hncwebsa" ]; then
+            if [ "$group" = "hncwebsa" ]; then  
                 home_dir="/home/${username}"
             else
                 home_dir="/home/othershome/${username}"
@@ -50,7 +52,7 @@ create_users() {
             mkdir -p "${home_dir}"
             chown "${username}:${group}" "${home_dir}"
 
-            if [ "$group" = "hncwebsa" ]; then
+            if [ "$group" = "hncwebsa" ]; then   # ADD MORE GROUPS HERE FOR WEB ACCESS
                 # More permissive for hncwebsa group
                 chmod 755 "${home_dir}"
                 if [ "$needs_web_access" = true ]; then
