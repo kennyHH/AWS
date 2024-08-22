@@ -61,6 +61,7 @@ create_users() {
                     chown "${username}:${group}" "${home_dir}/website"
                     chmod 755 "${home_dir}/website"
                     echo "Set up web directory for user: ${username}"
+                    chown "root:root" "/home/${username}"
                 fi
                 chown "root:root" "/home/${username}"
             else
@@ -85,6 +86,9 @@ create_users "/root/users_csv/hncothers.csv" "hncothers" false
 
 # Set correct permissions for /home and /home/othershome directories
 chmod 755 /home /home/othershome
+
+# Chown /home folder - required for SFTP Jail
+chown "root:root" "/home/"
 
 # Flush privileges to ensure all changes take effect
 mysql -h mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "FLUSH PRIVILEGES;"
