@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   mysql:
-    image: mysql:latest
+    image: mysql:9.0.1
     container_name: mysql
     restart: always
     environment:
@@ -28,11 +28,13 @@ services:
     environment:
       PMA_HOST: mysql
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-    ports:
-      - "8080:80"
+      PMA_ABSOLUTE_URI: /phpmyadmin
+    expose:
+      - "80"
+    volumes:
+      - ./persistent_folders/phpmyadmin:/var/www/html/phpmyadmin
     networks:
       - backend
-      - frontend
     depends_on:
       mysql:
         condition: service_healthy
@@ -51,9 +53,7 @@ services:
     volumes:
       - ./persistent_folders/home:/home
       - ./persistent_folders/apache:/etc/apache2/sites-enabled
-      - ./persistent_folders/config/sshd_config:/etc/ssh/sshd_config
       - ./persistent_folders/setup_flag:/setup_flag
-
     ports:
       - "80:80"
       - "2222:22"

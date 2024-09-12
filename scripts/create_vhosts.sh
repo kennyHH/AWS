@@ -49,11 +49,10 @@ EOF
 }
 
 # Process hncwebsa users
-next_index=$(process_csv "/root/users_csv/hncwebsa.csv" "hncwebsa" 1)
+next_index=$(process_csv "/root/users_csv/hncwebsa.csv" "webdev" 1)
 
 # Process hncwebmr users
-process_csv "/root/users_csv/hncwebmr.csv" "hncwebmr" $next_index
+process_csv "/root/users_csv/hncwebmr.csv" "webdev" $next_index
 
 # Ensure Apache can read the student directories
-usermod -aG hncwebsa www-data
-usermod -aG hncwebmr www-data
+usermod -aG webdev www-data
