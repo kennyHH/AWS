@@ -1,7 +1,3 @@
-# Changelog
-
-Version 0.8 - Beta
-
 ## Added
 
 * Changed user CSV creation from user input to a predefined list.
@@ -16,3 +12,7 @@ Version 0.8 - Beta
 
 * Create more groups
 * Security check
+
+## Errors
+
+* Annoying apache2 errors
