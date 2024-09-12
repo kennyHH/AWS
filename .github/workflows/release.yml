@@ -5,6 +5,9 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,10 +21,9 @@ jobs:
       id: changelog
       run: |
         changelog=$(cat CHANGELOG.md)
-        changelog="${changelog//'%'/'%25'}"
-        changelog="${changelog//$'\n'/'%0A'}"
-        changelog="${changelog//$'\r'/'%0D'}"
-        echo "::set-output name=content::$changelog"
+        echo "CHANGELOG<<EOF" >> $GITHUB_OUTPUT
+        echo "$changelog" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
 
     - name: Create Release
       id: create_release
@@ -31,7 +33,7 @@ jobs:
       with:
         tag_name: ${{ github.ref }}
         release_name: Release ${{ github.ref }}
-        body: ${{ steps.changelog.outputs.content }}
+        body: ${{ steps.changelog.outputs.CHANGELOG }}
         draft: false
         prerelease: false
 
@@ -44,3 +46,4 @@ jobs:
         asset_path: ./release.zip
         asset_name: source-code.zip
         asset_content_type: application/zip
+
