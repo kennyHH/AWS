@@ -28,11 +28,9 @@ services:
     environment:
       PMA_HOST: mysql
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      PMA_ABSOLUTE_URI: /phpmyadmin
+      PMA_ABSOLUTE_URI: http://192.168.1.241/phpmyadmin/
     expose:
       - "80"
-    volumes:
-      - ./persistent_folders/phpmyadmin:/var/www/html/phpmyadmin
     networks:
       - backend
     depends_on:
@@ -54,6 +52,8 @@ services:
       - ./persistent_folders/home:/home
       - ./persistent_folders/apache:/etc/apache2/sites-enabled
       - ./persistent_folders/setup_flag:/setup_flag
+      - ./users_csv/csv:/root/users_csv
+      - ./scripts/sync_users.sh:/root/sync_users.sh
     ports:
       - "80:80"
       - "2222:22"

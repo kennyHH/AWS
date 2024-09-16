@@ -1,18 +1,15 @@
-## Added
+## v0.86 16/09/2024
 
-* Changed user CSV creation from user input to a predefined list.
-* Merged all Web Development groups into 1 group for easier management
-* Created proxy for phpmyadmin - Accessible through /phpmyadmin instead of the port 8080
-* Created GitHub release page
+Changes:
 
-## Changed
-* Changed tag for mysql from latest to 9.01
+  - 2 main groups for student accounts : webdev and compsc
+  - Streamlined user creation
+  - Added persistance for user accounts on Apache.
 
-## To-Do
+Security:
+  - Moved PHPmyadmin to backend network only.
 
-* Create more groups
-* Security check
+Fix:
+  - PHPmyadmin errors fix (FINALLY)
+  - Various minor bugfixes
 
-## Errors
-
-* Annoying apache2 errors

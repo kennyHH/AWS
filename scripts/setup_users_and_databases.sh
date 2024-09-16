@@ -2,36 +2,29 @@
 
 chmod 755 /var/run/sshd
 
-# Create webdev and others folders
-mkdir -p /home/webdev /home/others
-chmod 755 /home/webdev /home/others
-chown root:root /home /home/webdev /home/others
+# Create group folders
+mkdir -p /home/webdev /home/compsc
+chmod 755 /home/webdev /home/compsc
+chown root:root /home /home/webdev /home/compsc
 
 # Function to create users and set up their environment
 create_users() {
     local csv_file=$1
     local group=$2
-    local needs_web_access=$3
 
     while IFS=',' read -r username password FULLNAME
     do
         # Skip the header line
         if [ "$username" != "USERNAME" ]; then
             # Determine home directory based on group
-            if [ "$group" = "webdev" ]; then
-                home_dir="/home/webdev/${username}"
-            else
-                home_dir="/home/others/${username}"
-            fi
-
-            # Check if the database already exists
-            if ! mysql -h mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "USE ${username}_db;" 2>/dev/null; then
-                # Create database if it doesn't exist
-                mysql -h mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "CREATE DATABASE ${username}_db;"
-                echo "Created database: ${username}_db"
-            else
-                echo "Database ${username}_db already exists. Skipping."
-            fi
+            case $group in
+                "webdev")
+                    home_dir="/home/webdev/${username}"
+                    ;;
+                "compsc")
+                    home_dir="/home/compsc/${username}"
+                    ;;
+            esac
 
             # Check if the user already exists
             if ! id -u "${username}" >/dev/null 2>&1; then
@@ -44,7 +37,6 @@ create_users() {
                 # Create MySQL user and grant privileges
                 mysql -h mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "CREATE USER '${username}'@'%' IDENTIFIED BY '${password}';"
                 mysql -h mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "GRANT ALL PRIVILEGES ON \`${username}_%\`.* TO '${username}'@'%';"
-                mysql -h mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "FLUSH PRIVILEGES;"
                 
                 echo "Created MySQL user: ${username}"
             else
@@ -57,16 +49,13 @@ create_users() {
             chown root:root "${home_dir}"
             chmod 755 "${home_dir}"
 
+            # Create 'website' directory for webdev group, 'files' directory for compsc
             if [ "$group" = "webdev" ]; then
-                # For webdev group, create 'website' directory
-                if [ "$needs_web_access" = true ]; then
-                    mkdir -p "${home_dir}/website"
-                    chown "${username}:${group}" "${home_dir}/website"
-                    chmod 755 "${home_dir}/website"
-                    echo "Set up web directory for user: ${username}"
-                fi
+                mkdir -p "${home_dir}/website"
+                chown "${username}:${group}" "${home_dir}/website"
+                chmod 755 "${home_dir}/website"
+                echo "Set up web directory for user: ${username}"
             else
-                # For other groups, create 'files' directory
                 mkdir -p "${home_dir}/files"
                 chown "${username}:${group}" "${home_dir}/files"
                 chmod 700 "${home_dir}/files"
@@ -75,15 +64,15 @@ create_users() {
     done < "$csv_file"
 }
 
-# Create users from webdev.csv
-create_users "/root/users_csv/hncwebsa.csv" "webdev" true
-create_users "/root/users_csv/hncwebmr.csv" "webdev" true
-
-# Create users from hnccssa.csv
-create_users "/root/users_csv/hnccssa.csv" "hnccssa" false
-
-# Create users from others.csv
-create_users "/root/users_csv/hncothers.csv" "hncothers" false
+# Create users from CSV files
+create_users "/root/users_csv/hncwebsa.csv" "webdev"
+create_users "/root/users_csv/hndwebsa.csv" "webdev"
+create_users "/root/users_csv/hncwebmr.csv" "webdev"
+create_users "/root/users_csv/hndwebmr.csv" "webdev"
+create_users "/root/users_csv/hnccssa.csv" "compsc"
+create_users "/root/users_csv/hndcssa.csv" "compsc"
+create_users "/root/users_csv/hnccsmr.csv" "compsc"
+create_users "/root/users_csv/hndcsmr.csv" "compsc"
 
 # Set correct permissions for /home directory
 chmod 755 /home
@@ -96,3 +85,4 @@ mysql -h mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "FLUSH PRIVILEGES;"
 touch /setup_flag/setup_done
 
 echo "Initial setup completed."
+

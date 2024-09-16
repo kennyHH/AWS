@@ -121,7 +121,7 @@ Match Group webdev
     X11Forwarding no
     PasswordAuthentication yes
     
-Match Group hnccssa,hncothers
+Match Group compsc
     ChrootDirectory %h
     ForceCommand internal-sftp
     AllowTcpForwarding no

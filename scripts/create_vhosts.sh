@@ -34,8 +34,8 @@ process_csv() {
         if [ "$username" != "username" ]; then
             # Create the student-specific configuration file
             cat > "/etc/apache2/sites-enabled/student$i.conf" << EOF
-Alias /$username "/home/$username/website"
-<Directory "/home/$username/website">
+Alias /$username "/home/webdev/$username/website"
+<Directory "/home/webdev/$username/website">
     Options FollowSymLinks
     AllowOverride All
     Require all granted
@@ -48,11 +48,13 @@ EOF
     echo $i
 }
 
-# Process hncwebsa users
+# Process the users
 next_index=$(process_csv "/root/users_csv/hncwebsa.csv" "webdev" 1)
 
-# Process hncwebmr users
+process_csv "/root/users_csv/hndwebsa.csv" "webdev" $next_index
+process_csv "/root/users_csv/hndwebmr.csv" "webdev" $next_index
 process_csv "/root/users_csv/hncwebmr.csv" "webdev" $next_index
+
 
 # Ensure Apache can read the student directories
 usermod -aG webdev www-data
