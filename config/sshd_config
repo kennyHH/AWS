@@ -127,3 +127,13 @@ Match Group compsc
     AllowTcpForwarding no
     X11Forwarding no
     PasswordAuthentication yes
+    
+# Admin group configuration
+Match Group admin
+    ChrootDirectory none
+    ForceCommand none
+    AllowTcpForwarding yes
+    X11Forwarding yes
+    PasswordAuthentication yes
+    PermitTTY yes
+

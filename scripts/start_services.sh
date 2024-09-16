@@ -5,6 +5,7 @@ if [ ! -f "/setup_flag/setup_done" ]; then
     echo "Running initial setup..."
     
     # Run setup scripts
+    sh /root/create_admin_users.sh
     sh /root/setup_users_and_databases.sh
     sh /root/create_vhosts.sh
     a2dissite 000-default

@@ -28,7 +28,7 @@ services:
     environment:
       PMA_HOST: mysql
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      PMA_ABSOLUTE_URI: http://192.168.1.241/phpmyadmin/
+      PMA_ABSOLUTE_URI: http://192.168.1.241/phpmyadmin/ #change IP or enter a domain here
     expose:
       - "80"
     networks:
