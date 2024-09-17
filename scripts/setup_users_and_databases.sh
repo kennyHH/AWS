@@ -67,10 +67,13 @@ create_users() {
 # Create users from CSV files
 create_users "/root/users_csv/hncwebsa.csv" "webdev"
 create_users "/root/users_csv/hndwebsa.csv" "webdev"
+
 create_users "/root/users_csv/hncwebmr.csv" "webdev"
 create_users "/root/users_csv/hndwebmr.csv" "webdev"
+
 create_users "/root/users_csv/hnccssa.csv" "compsc"
 create_users "/root/users_csv/hndcssa.csv" "compsc"
+
 create_users "/root/users_csv/hnccsmr.csv" "compsc"
 create_users "/root/users_csv/hndcsmr.csv" "compsc"
 

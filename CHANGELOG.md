@@ -1,8 +1,18 @@
-## 16/09/2024
+## 17/09/2024
 
 Changes:
 
-  - Added admin group with 3 users
-  - Admin group has SUDO permissions
-  - Persistance for admin group
+* Redid the create_vhosts.sh script to include admins
+* Teacher websites are served from /website folder too.
+* Enabled SSH for compsc group
 
+Security:
+
+* Fixed permissions issues for groups
+* Enhanced security
+* Proper permissions for admin group
+
+Fixes:
+
+* Fixed persistance issues
+* Fixed apache2 configuration files creation

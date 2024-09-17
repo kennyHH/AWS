@@ -83,12 +83,16 @@ process_csv() {
 echo "Syncing users from CSV files..."
 
 # Process regular user CSV files
+# Web Sighthill
 process_csv "/root/users_csv/hncwebsa.csv" "webdev"
 process_csv "/root/users_csv/hndwebsa.csv" "webdev"
+# Web Milton Road
 process_csv "/root/users_csv/hncwebmr.csv" "webdev"
 process_csv "/root/users_csv/hndwebmr.csv" "webdev"
+# Comp science Sighthill
 process_csv "/root/users_csv/hnccssa.csv" "compsc"
 process_csv "/root/users_csv/hndcssa.csv" "compsc"
+# Comp science Milton
 process_csv "/root/users_csv/hnccsmr.csv" "compsc"
 process_csv "/root/users_csv/hndcsmr.csv" "compsc"
 
@@ -96,7 +100,5 @@ process_csv "/root/users_csv/hndcsmr.csv" "compsc"
 process_csv "/root/users_csv/admin_users.csv" "admin"
 
 echo "User synchronization completed."
-
 # Ensure changes take effect for SSH
 exec /usr/sbin/sshd -D
-

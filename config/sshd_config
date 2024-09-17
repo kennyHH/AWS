@@ -122,11 +122,12 @@ Match Group webdev
     PasswordAuthentication yes
     
 Match Group compsc
-    ChrootDirectory %h
-    ForceCommand internal-sftp
-    AllowTcpForwarding no
-    X11Forwarding no
+    ChrootDirectory none
+    ForceCommand none
+    AllowTcpForwarding yes
+    X11Forwarding yes
     PasswordAuthentication yes
+    PermitTTY yes
     
 # Admin group configuration
 Match Group admin
