@@ -6,7 +6,7 @@
 
 This project sets up a LAMP (Linux, Apache, MySQL, PHP) stack using Docker, with additional features for user management and web hosting. It's designed to create a development environment for multiple user groups with different access levels.
 
-Download the latest version from here:
+#### Download the latest version from here:
 
 <!-- BEGIN LATEST DOWNLOAD BUTTON -->
 [![Download zip](https://custom-icon-badges.demolab.com/badge/-Download-blue?style=for-the-badge&logo=download&logoColor=white "Download zip")](https://github.com/kennyHH/AWS/archive/refs/tags/v0.902.zip)

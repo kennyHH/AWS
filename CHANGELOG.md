@@ -2,8 +2,5 @@
 
 Changes:
 
-* Updated documentation
+* Updated documentation (again)
 
-Fixes:
-
-* Fixed `generate_users.sh` script 
