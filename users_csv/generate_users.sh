@@ -17,16 +17,30 @@ generate_password() {
     < /dev/urandom tr -dc 'A-Za-z0-9' | head -c10
 }
 
+# Function to clean CSV files
+clean_csv_files() {
+    echo "Cleaning CSV files in the 'csv' folder..."
+    for file in csv/*.csv; do
+        if [ -f "$file" ]; then
+            # Keep only the first line (header) and remove the rest
+            sed -i '1!d' "$file"
+            echo "Cleaned $file"
+        fi
+    done
+    echo "CSV files cleaned successfully."
+}
+
 # Main loop
 while true; do
     # Sort the group names
     sorted_groups=($(echo "${!group_options[@]}" | tr ' ' '\n' | sort))
 
     # Display group options
-    echo "Select a group for the usernames (or enter 'q' to quit):"
+    echo "Select a group for the usernames, 'clean' to clean CSV files, or enter 'q' to quit:"
     for i in "${!sorted_groups[@]}"; do
         echo "$((i+1)). ${sorted_groups[i]}"
     done
+    echo "10. clean"
     echo "q. Quit"
 
     # Get user selection
@@ -35,6 +49,9 @@ while true; do
     if [[ "$choice" == "q" ]]; then
         echo "Exiting the script. Goodbye!"
         exit 0
+    elif [[ "$choice" == "10" ]] || [[ "$choice" == "clean" ]]; then
+        clean_csv_files
+        continue
     elif [[ "$choice" =~ ^[0-9]+$ ]] && [ "$choice" -ge 1 ] && [ "$choice" -le "${#sorted_groups[@]}" ]; then
         group="${sorted_groups[$((choice-1))]}"
         echo "You selected $group"
