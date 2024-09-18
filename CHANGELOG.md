@@ -2,17 +2,8 @@
 
 Changes:
 
-* Redid the create_vhosts.sh script to include admins
-* Teacher websites are served from /website folder too.
-* Enabled SSH for compsc group
-
-Security:
-
-* Fixed permissions issues for groups
-* Enhanced security
-* Proper permissions for admin group
+* Updated documentation
 
 Fixes:
 
-* Fixed persistance issues
-* Fixed apache2 configuration files creation
+* Fixed `generate_users.sh` script 

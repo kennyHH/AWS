@@ -22,26 +22,25 @@ while true; do
     # Sort the group names
     sorted_groups=($(echo "${!group_options[@]}" | tr ' ' '\n' | sort))
 
-    # Display group options and get selection
-    echo "Select a group for the usernames (or type 'quit' to exit):"
-    PS3=$'Please enter your choice:\n'
-    select choice in "${sorted_groups[@]}" "quit"; do
-        if [[ "$choice" == "quit" ]]; then
-            echo "Exiting the script. Goodbye!"
-            exit 0
-        elif [[ -n "$choice" ]]; then
-            group="$choice"
-            echo "You selected $group"
-            break
-        else
-            echo "Invalid selection. Please try again."
-        fi
+    # Display group options
+    echo "Select a group for the usernames (or enter 'q' to quit):"
+    for i in "${!sorted_groups[@]}"; do
+        echo "$((i+1)). ${sorted_groups[i]}"
     done
+    echo "q. Quit"
 
-    # Check if user wants to quit
-    if [[ "$REPLY" == "quit" ]]; then
+    # Get user selection
+    read -p "Enter your choice: " choice
+
+    if [[ "$choice" == "q" ]]; then
         echo "Exiting the script. Goodbye!"
         exit 0
+    elif [[ "$choice" =~ ^[0-9]+$ ]] && [ "$choice" -ge 1 ] && [ "$choice" -le "${#sorted_groups[@]}" ]; then
+        group="${sorted_groups[$((choice-1))]}"
+        echo "You selected $group"
+    else
+        echo "Invalid selection. Please try again."
+        continue
     fi
 
     # Get the corresponding input file
