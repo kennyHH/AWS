@@ -1,39 +1,42 @@
 name: "Download Button Action"
-
 on:
-  release:
-    types:
-      - published
+  push:
+    tags:
+      - 'v*'  # This will trigger the workflow for any tag starting with 'v'
   workflow_dispatch:
 
 jobs:
-  release:
+  update-readme:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
-      - name: Get latest release
-        id: get-latest-release
-        uses: InsonusK/get-latest-release@v1.0.1
-        with:
-          myToken: ${{ github.token }}
-          view_top: 1
+      - name: Get latest tag
+        id: get-latest-tag
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/tags/}
 
-      - name: Readme Download Button Action
+      - name: Update README with download button
         env:
           GITHUB_USER: "kennyHH"
           REPO: "AWS"
           FORMAT: "zip"
-          VERSION: "${{ steps.get-latest-release.outputs.tag_name }}"
+          VERSION: "${{ steps.get-latest-tag.outputs.tag }}"
           COLOR: "blue"
           BEGIN_TAG: "<!-- BEGIN LATEST DOWNLOAD BUTTON -->"
           END_TAG: "<!-- END LATEST DOWNLOAD BUTTON -->"
         run: |
-          UPDATE=$(cat README.md | perl -0777 -pe 's#(${{ env.BEGIN_TAG }})(?:.|\n)*?(${{ env.END_TAG }})#${1}\n[![Download ${{ env.FORMAT }}](https://custom-icon-badges.demolab.com/badge/-Download-${{ env.COLOR }}?style=for-the-badge&logo=download&logoColor=white "Download ${{ env.FORMAT }}")](https://github.com/${{ env.GITHUB_USER }}/${{ env.REPO }}/archive/${{ env.VERSION }}.${{ env.FORMAT }})\n${2}#g')
-          echo "${UPDATE}" > README.md
+          BUTTON="[![Download ${{ env.FORMAT }}](https://custom-icon-badges.demolab.com/badge/-Download-${{ env.COLOR }}?style=for-the-badge&logo=download&logoColor=white \"Download ${{ env.FORMAT }}\")](${{ github.server_url }}/${{ env.GITHUB_USER }}/${{ env.REPO }}/archive/refs/tags/${{ env.VERSION }}.${{ env.FORMAT }})"
+          sed -i "/${{ env.BEGIN_TAG }}/,/${{ env.END_TAG }}/c\\${{ env.BEGIN_TAG }}\n${BUTTON}\n${{ env.END_TAG }}" README.md
 
-      - uses: EndBug/add-and-commit@v7
+      - name: Check for changes
+        id: git-check
+        run: |
+          git diff --exit-code || echo "::set-output name=changed::true"
+
+      - name: Commit changes
+        if: steps.git-check.outputs.changed == 'true'
+        uses: EndBug/add-and-commit@v7
         with:
-          message: "docs(readme): Bump download button version to ${{ steps.get-latest-release.outputs.tag_name }}"
+          message: "docs(readme): Bump download button version to ${{ steps.get-latest-tag.outputs.tag }}"
           default_author: github_actions
           branch: main
