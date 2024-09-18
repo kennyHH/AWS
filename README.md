@@ -9,6 +9,7 @@ This project sets up a LAMP (Linux, Apache, MySQL, PHP) stack using Docker, with
 Download the latest version from here:
 
 <!-- BEGIN LATEST DOWNLOAD BUTTON -->
+[![Download zip](https://custom-icon-badges.demolab.com/badge/-Download-blue?style=for-the-badge&logo=download&logoColor=white "Download zip")](https://github.com/kennyHH/AWS/archive/refs/tags/v0.902.zip)
 <!-- END LATEST DOWNLOAD BUTTON -->
 
 ## Table of Contents
