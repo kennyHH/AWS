@@ -2,7 +2,6 @@
 <div align="center">
   <img src="https://miro.medium.com/v2/resize:fit:640/format:webp/0*8gspH6Y2Q141WeLT.jpg" alt="LAMP Docker Logo">
 </div>
-<a name="readme-top"></a>
 This project sets up a LAMP (Linux, Apache, MySQL, PHP) stack using Docker, with additional features for user management and web hosting. It's designed to create a development environment for multiple user groups with different access levels.
 
 #### Download the latest version from here:
