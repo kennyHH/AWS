@@ -1,5 +1,5 @@
 <h1 align="center">🐳 LAMP Stack Docker Project 🐳</h1>
-
+<a name="readme-top"></a>
 <div align="center">
   <img src="https://miro.medium.com/v2/resize:fit:640/format:webp/0*8gspH6Y2Q141WeLT.jpg" alt="LAMP Docker Logo">
 </div>
@@ -48,7 +48,7 @@ This project sets up a LAMP (Linux, Apache, MySQL, PHP) stack using Docker, with
 | ---------- | ----------- | ----------------- | :---: | :--------: | :--------: | :--------: | :--------: |
 | Web Development    | webdev | hnXwebXX + studentname       |   X   |     X      |     X      |            |        X    |
 | Computer Science      | compsc | hnXcsXX + studentname       |   X   |     X      |        X    |     X      |            |
-
+<p align="right">(<a href="readme-top">back to top</a>)</p>
 ## 📁 Project Structure
 
 - `/config/`: Configuration files
@@ -59,10 +59,10 @@ This project sets up a LAMP (Linux, Apache, MySQL, PHP) stack using Docker, with
   - `/setup_flag/`: Setup status flags
 - `/scripts/`: Setup and maintenance scripts
 - `/users_csv/`: User data and generation scripts
-
+- 
 ## 🛠 Prerequisites
 
-- Docker 🐳
+- Docker 
 ```bash
 apt-get update -y
 sudo apt-get update
@@ -90,7 +90,7 @@ systemctl status docker
 docker --version
 ```
 
-- Docker Compose 🐙
+- Docker Compose 
 ```bash
 mkdir -p ~/.docker/cli-plugins/
 curl -SL https://github.com/docker/compose/releases/download/v2.3.3/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
