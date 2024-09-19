@@ -58,7 +58,7 @@ This project sets up a LAMP (Linux, Apache, MySQL, PHP) stack using Docker, with
   - `/setup_flag/`: Setup status flags
 - `/scripts/`: Setup and maintenance scripts
 - `/users_csv/`: User data and generation scripts
-- 
+<p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 ## 🛠 Prerequisites
 
 - Docker 
@@ -95,7 +95,7 @@ mkdir -p ~/.docker/cli-plugins/
 curl -SL https://github.com/docker/compose/releases/download/v2.3.3/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
 chmod +x ~/.docker/cli-plugins/docker-compose
 ```
-
+<p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 ## 🚀 Getting Started
 
 ### Setup
@@ -124,7 +124,7 @@ chmod +x ~/.docker/cli-plugins/docker-compose
 > To recreate the environment from scratch, use the `cleanup.sh` script in the `./persistent_folders` directory.
 
 ![demo](gifs/cleanup.gif)
-
+<p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 ### Usage
 
 - Apache web server is accessible at `http://<ip>`
@@ -138,7 +138,7 @@ chmod +x ~/.docker/cli-plugins/docker-compose
   ```bash
   mysql -h mysql -P 3306 -u<username> -p
   ```
-
+<p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 ## 👤 User Management 
 
 ### User Generation
@@ -197,35 +197,35 @@ HNCWEBSAJSMITH,Xa5tP9qR,John Smith
 - The names of TXT and CSV files are hardcoded and can't be changed.
 - Ensure that the input text files (`hncwebsa.txt`, `hndcsmr.txt`, etc.) are up-to-date with the correct student names before running the script.
 - The generated CSV files are used by other scripts in the project to set up user accounts, databases and permissions.
-
+<p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 ## 💾 Data Persistence
 
 User data including home folders and MySQL databases persist across container restarts.
-
+<p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 ## 🔒 Security Notes
 
 - 🔑 Change default passwords in CSV files for production use
 - 🛡️ Review and adjust file permissions as needed
 - 🔐 Consider using Docker secrets for sensitive information in production
-
+<p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 ## 🔧 Known Issues
-
+<p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 #### Apache errors
 
 - Apache configuration overlap warnings
-
+<p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 ## 🖥 Roadmap 
 
 [This section is currently empty]
-
+<p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 ## 🤝 Contributing
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests.
-
+<p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
-
+<p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 ---
 
 <div align="center">
