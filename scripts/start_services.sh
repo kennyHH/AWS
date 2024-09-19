@@ -15,6 +15,8 @@ if [ ! -f "/setup_flag/setup_done" ]; then
 else
     echo "Setup already done. Syncing users..."
     sh /root/sync_users.sh
+    echo "Started apache2 service"
+    exec apache2-foreground
 fi
 
 # Start SSH service
