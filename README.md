@@ -1,4 +1,4 @@
-<h1 align="center">🐳 LAMP Stack Docker Project 🐳</h1>
+<h1 align="center">LAMP Stack Docker Project</h1>
 <div align="center">
   <img src="https://miro.medium.com/v2/resize:fit:640/format:webp/0*8gspH6Y2Q141WeLT.jpg" alt="LAMP Docker Logo">
 </div>
@@ -47,6 +47,7 @@ This project sets up a LAMP (Linux, Apache, MySQL, PHP) stack using Docker, with
 | Web Development    | webdev | hnXwebXX + studentname       |   X   |     X      |     X      |            |        X    |
 | Computer Science      | compsc | hnXcsXX + studentname       |   X   |     X      |        X    |     X      |            |
 <p align="right">(<a href="#table-of-contents">back to top</a>)</p>
+
 ## 📁 Project Structure
 
 - `/config/`: Configuration files
@@ -58,6 +59,7 @@ This project sets up a LAMP (Linux, Apache, MySQL, PHP) stack using Docker, with
 - `/scripts/`: Setup and maintenance scripts
 - `/users_csv/`: User data and generation scripts
 <p align="right">(<a href="#table-of-contents">back to top</a>)</p>
+
 ## 🛠 Prerequisites
 
 - Docker 
@@ -95,6 +97,7 @@ curl -SL https://github.com/docker/compose/releases/download/v2.3.3/docker-compo
 chmod +x ~/.docker/cli-plugins/docker-compose
 ```
 <p align="right">(<a href="#table-of-contents">back to top</a>)</p>
+
 ## 🚀 Getting Started
 
 ### Setup
@@ -123,7 +126,7 @@ chmod +x ~/.docker/cli-plugins/docker-compose
 > To recreate the environment from scratch, use the `cleanup.sh` script in the `./persistent_folders` directory.
 
 ![demo](gifs/cleanup.gif)
-<p align="right">(<a href="#table-of-contents">back to top</a>)</p>
+
 ### Usage
 
 - Apache web server is accessible at `http://<ip>`
@@ -138,6 +141,7 @@ chmod +x ~/.docker/cli-plugins/docker-compose
   mysql -h mysql -P 3306 -u<username> -p
   ```
 <p align="right">(<a href="#table-of-contents">back to top</a>)</p>
+
 ## 👤 User Management 
 
 ### User Generation
@@ -197,30 +201,36 @@ HNCWEBSAJSMITH,Xa5tP9qR,John Smith
 - Ensure that the input text files (`hncwebsa.txt`, `hndcsmr.txt`, etc.) are up-to-date with the correct student names before running the script.
 - The generated CSV files are used by other scripts in the project to set up user accounts, databases and permissions.
 <p align="right">(<a href="#table-of-contents">back to top</a>)</p>
+
 ## 💾 Data Persistence
 
 User data including home folders and MySQL databases persist across container restarts.
 <p align="right">(<a href="#table-of-contents">back to top</a>)</p>
+
 ## 🔒 Security Notes
 
 - 🔑 Change default passwords in CSV files for production use
 - 🛡️ Review and adjust file permissions as needed
 - 🔐 Consider using Docker secrets for sensitive information in production
 <p align="right">(<a href="#table-of-contents">back to top</a>)</p>
+
 ## 🔧 Known Issues
-<p align="right">(<a href="#table-of-contents">back to top</a>)</p>
+
 #### Apache errors
 
 - Apache configuration overlap warnings
 <p align="right">(<a href="#table-of-contents">back to top</a>)</p>
+
 ## 🖥 Roadmap 
 
 [This section is currently empty]
 <p align="right">(<a href="#table-of-contents">back to top</a>)</p>
+
 ## 🤝 Contributing
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests.
 <p align="right">(<a href="#table-of-contents">back to top</a>)</p>
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
