@@ -46,6 +46,7 @@ This project sets up a LAMP (Linux, Apache, MySQL, PHP) stack using Docker, with
 | ---------- | ----------- | ----------------- | :---: | :--------: | :--------: | :--------: | :--------: |
 | Web Development    | webdev | hnXwebXX + studentname       |   X   |     X      |     X      |            |        X    |
 | Computer Science      | compsc | hnXcsXX + studentname       |   X   |     X      |        X    |     X      |            |
+| Administrators      | admin | username       |   X   |     X      |        X    |     X      |     X       |
 <p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 
 ## 📁 Project Structure
