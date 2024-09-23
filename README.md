@@ -124,9 +124,7 @@ chmod +x ~/.docker/cli-plugins/docker-compose
    ```
 
 >[!TIP] 
-> To recreate the environment from scratch, use the `cleanup.sh` script in the `./persistent_folders` directory.
-
-![demo](./assets/gifs/cleanup.gif)
+> To recreate the environment from scratch, use the `cleanup.sh` script `sudo ./cleanup.sh`
 
 ### Usage
 
