@@ -120,11 +120,11 @@ chmod +x ~/.docker/cli-plugins/docker-compose
 
 5. Build and start the containers:
    ```bash
-   docker-compose up -d --build
+   docker compose up -d --build
    ```
 
 >[!TIP] 
-> To recreate the environment from scratch, use the `cleanup.sh` script `sudo ./cleanup.sh`
+> To recreate the environment from scratch, use the **cleanup.sh** script: `sudo ./cleanup.sh`
 
 ### Usage
 

@@ -2,7 +2,4 @@
 
 Changes:
 
-* New Docker structure
-* MySQL and Apache Dockerfiles volume mounts changes
-* Users and databases are created now during docker image creation
-
+* Added basic shell script quotas 
