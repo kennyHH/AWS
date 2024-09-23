@@ -1,6 +1,8 @@
-## 17/09/2024
+## 23/09/2024
 
 Changes:
 
-* test
+* New Docker structure
+* MySQL and Apache Dockerfiles volume mounts changes
+* Users and databases are created now during docker image creation
 

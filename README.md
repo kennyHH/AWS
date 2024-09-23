@@ -126,7 +126,7 @@ chmod +x ~/.docker/cli-plugins/docker-compose
 >[!TIP] 
 > To recreate the environment from scratch, use the `cleanup.sh` script in the `./persistent_folders` directory.
 
-![demo](gifs/cleanup.gif)
+![demo](./assets/gifs/cleanup.gif)
 
 ### Usage
 
@@ -151,7 +151,7 @@ This project uses a custom script to generate user accounts for different groups
 
 The Administrators details can be changed in `./users_csv/csv/admin_users.csv`.
 
-![demo](gifs/user_gen.gif)
+![demo](.assets/gifs/user_gen.gif)
 
 #### How it works
 

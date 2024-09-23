@@ -1,0 +1,15 @@
+FROM mysql:9.0.1
+
+# Install necessary packages
+# RUN apt-get update && apt-get upgrade
+
+# Copy the setup script
+COPY ./scripts/create_mysql_db.sh /docker-entrypoint-initdb.d/
+
+# Copy the CSV files
+COPY ./users_csv/csv/ /docker-entrypoint-initdb.d/csv/
+
+# Make the script executable
+RUN chmod +x /docker-entrypoint-initdb.d/create_mysql_db.sh
+
+RUN unset MYSQL_ROOT_PASSWORD

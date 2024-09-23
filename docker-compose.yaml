@@ -1,14 +1,14 @@
-version: '3.8'
-
 services:
   mysql:
-    image: mysql:9.0.1
+    build: 
+      context: .
+      dockerfile: Dockerfile2
     container_name: mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
-      - ./persistent_folders/mysql_data:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
     ports:
       - "3306:3306"
     networks:
@@ -49,11 +49,8 @@ services:
       MYSQL_HOST: mysql
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
-      - ./persistent_folders/home:/home
-      - ./persistent_folders/apache:/etc/apache2/sites-enabled
-      - ./persistent_folders/setup_flag:/setup_flag
-      - ./users_csv/csv:/root/users_csv
-     # - ./scripts/sync_users.sh:/root/sync_users.sh
+      - apache_home:/home
+      - apache_sites:/etc/apache2/sites-enabled
     ports:
       - "80:80"
       - "22:22"
@@ -63,8 +60,6 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
-    env_file:
-      - .env
       
 networks:
   backend:
@@ -72,4 +67,5 @@ networks:
 
 volumes:
   mysql_data:
-  setup_flag:
+  apache_home:
+  apache_sites:

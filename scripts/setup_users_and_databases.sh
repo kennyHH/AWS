@@ -34,11 +34,6 @@ create_users() {
                 echo "${username}:${password}" | chpasswd
                 echo "Created system user: ${username}"
 
-                # Create MySQL user and grant privileges
-                mysql -h mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "CREATE USER '${username}'@'%' IDENTIFIED BY '${password}';"
-                mysql -h mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "GRANT ALL PRIVILEGES ON \`${username}_%\`.* TO '${username}'@'%';"
-                
-                echo "Created MySQL user: ${username}"
             else
                 echo "User ${username} already exists. Updating home directory and group."
                 usermod -d "${home_dir}" -g "${group}" "${username}"
@@ -80,9 +75,6 @@ create_users "/root/users_csv/hndcsmr.csv" "compsc"
 # Set correct permissions for /home directory
 chmod 755 /home
 chown root:root /home
-
-# Flush privileges to ensure all changes take effect
-mysql -h mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "FLUSH PRIVILEGES;"
 
 # Create a flag file to indicate that setup is done
 touch /setup_flag/setup_done
