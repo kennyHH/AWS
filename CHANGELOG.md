@@ -2,4 +2,5 @@
 
 Changes:
 
-* Added basic shell script quotas 
+* Quotas script changes and enhancements
+* New cleanup.gif

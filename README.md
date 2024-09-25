@@ -126,6 +126,8 @@ chmod +x ~/.docker/cli-plugins/docker-compose
 >[!TIP] 
 > To recreate the environment from scratch, use the **cleanup.sh** script: `sudo ./cleanup.sh`
 
+![demo](.assets/gifs/cleanup.gif)
+
 ### Usage
 
 - Apache web server is accessible at `http://<ip>`

@@ -53,8 +53,8 @@ RUN a2ensite phpmyadmin-proxy
 CMD ["apachectl", "-D", "FOREGROUND"]
 
 # Set up cron jobs
-RUN echo "0 * * * * /root/scan_and_move_large_files.sh" > /etc/cron.d/scan_large_files
-RUN echo "*/10 * * * * /root/clear_tmp_folder.sh" > /etc/cron.d/clear_tmp
+RUN echo "*/1 * * * * /root/scan_and_move_large_files.sh" > /etc/cron.d/scan_large_files
+RUN echo "*/3 * * * * /root/clear_tmp_folder.sh" > /etc/cron.d/clear_tmp
 RUN chmod 0644 /etc/cron.d/scan_large_files /etc/cron.d/clear_tmp
 
 # Combine cron jobs into a single crontab file
