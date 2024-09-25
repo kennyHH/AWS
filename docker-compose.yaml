@@ -51,6 +51,7 @@ services:
     volumes:
       - apache_home:/home
       - apache_sites:/etc/apache2/sites-enabled
+      - apache_logs:/var/log
     ports:
       - "80:80"
       - "22:22"
@@ -69,3 +70,4 @@ volumes:
   mysql_data:
   apache_home:
   apache_sites:
+  apache_logs:
