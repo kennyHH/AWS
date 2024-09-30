@@ -2,4 +2,4 @@
 
 Changes:
 
-* Addede shortcuts for storage in ./persistent_folders
+* Readme changes

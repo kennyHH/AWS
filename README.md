@@ -173,14 +173,14 @@ The Administrators details can be changed in `./users_csv/csv/admin_users.csv`.
 
 ### Available Groups
 
-- `HNCWEBSA`: HNC Web Development (Sighthill)
-- `HNDWEBSA`: HND Web Development (Sighthill)
-- `HNCWEBMR`: HNC Web Development (Milton Road)
-- `HNDWEBMR`: HND Web Development (Milton Road)
-- `HNCCSSA`: HNC Computer Science (Sighthill)
-- `HNDCSSA`: HND Computer Science (Sighthill)
-- `HNCCSMR`: HNC Computer Science (Milton Road)
-- `HNDCSMR`: HND Computer Science (Milton Road)
+- `HNCWEBSA`: HNC Web Development (Campus1)
+- `HNDWEBSA`: HND Web Development (Campus1)
+- `HNCCSSA`: HNC Computer Science (Campus1)
+- `HNDCSSA`: HND Computer Science (Campus1)
+- `HNCWEBMR`: HNC Web Development (Campus2)
+- `HNDWEBMR`: HND Web Development (Campus2)
+- `HNCCSMR`: HNC Computer Science (Campus2)
+- `HNDCSMR`: HND Computer Science (Campus2)
 
 #### Output Format
 
